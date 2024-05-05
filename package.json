@@ -2,11 +2,12 @@
   "name": "glowing-giggle",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "index.js",
   "scripts": {
-    "start": "ts-node src/server/index.ts",
+    "start": "node build/index.js",
     "dev": "ts-node-dev src/server/index.ts",
-    "lint": "eslint --ext .ts src/**/**"
+    "lint": "eslint --ext .ts src/**/**",
+    "tsc": "tsc"
   },
   "author": "Tuomas",
   "license": "MIT",
