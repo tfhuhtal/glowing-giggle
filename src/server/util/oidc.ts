@@ -7,9 +7,9 @@ const setUpAuth = () => {
   passport.use(new GoogleStrategy({
     clientID: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/auth/google/callback',
+    callbackURL: 'http://localhost:3000/api/auth/google/callback',
   },
-  (_accessToken, _refreshToken, profile, done) => done(null, profile)));
+    (_accessToken, _refreshToken, profile, done) => done(null, profile)));
 
   passport.serializeUser((user, done) => done(null, user));
 
