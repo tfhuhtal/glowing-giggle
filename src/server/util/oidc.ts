@@ -1,19 +1,30 @@
 import passport from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { Strategy, Profile } from 'passport-google-oauth20';
 import { CLIENT_ID, CLIENT_SECRET } from './config';
-import { User } from '../../types';
+import { User as UserType } from '../types';
+import { User } from '../db/models';
 
-const setUpAuth = () => {
-  passport.use(new GoogleStrategy({
+const setUpAuth = async () => {
+  passport.use(new Strategy({
     clientID: CLIENT_ID,
     clientSecret: CLIENT_SECRET,
     callbackURL: 'http://localhost:3000/api/auth/google/callback',
-  },
-    (_accessToken, _refreshToken, profile, done) => done(null, profile)));
+  }, async (_accessToken, _refreshToken, profile: Profile, done) => {
+
+    const id = profile.id || '';
+    const username = profile.username || '';
+    const email = (profile.emails && profile.emails[0]?.value) || '';
+    const name = profile.displayName || '';
+    const createdAt = new Date;
+    const updatedAt = new Date;
+
+    await User.upsert({ id, username, email, name, createdAt, updatedAt });
+    done(null, profile);
+  }));
 
   passport.serializeUser((user, done) => done(null, user));
 
-  passport.deserializeUser((user: User, done) => done(null, user));
+  passport.deserializeUser((user: UserType, done) => done(null, user));
 };
 
 export default setUpAuth;

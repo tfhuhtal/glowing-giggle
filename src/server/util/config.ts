@@ -9,3 +9,5 @@ export const SECRET = process.env.SECRET || '';
 export const CLIENT_ID = process.env.CLIENT_ID || '';
 
 export const CLIENT_SECRET = process.env.CLIENT_SECRET || '';
+
+export const DATABASE_URL = process.env.DATABASE_URL || '';
