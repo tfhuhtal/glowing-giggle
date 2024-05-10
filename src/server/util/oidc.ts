@@ -1,8 +1,7 @@
 import passport from 'passport';
 import { Strategy, Profile } from 'passport-google-oauth20';
-import crypto from 'crypto';
 import { CLIENT_ID, CLIENT_SECRET } from './config';
-import { User as UserType, UserInfo } from '../types';
+import { User as UserType } from '../types';
 import { User } from '../db/models';
 
 type Done = (
@@ -12,12 +11,12 @@ type Done = (
 
 const handleAuthCallback = async (_accessToken: string, _refreshToken: string, profile: Profile, done: Done) => {
   try {
-    const { id = '', username = crypto.randomBytes(8).toString("hex"), displayName: name = '', emails } = profile as UserInfo;
+    const { id = '', displayName: name = '', emails } = profile as UserType;
     const email = (emails && emails[0]?.value) || '';
     const createdAt = new Date();
     const updatedAt = new Date();
 
-    await User.upsert({ id, username, email, name, createdAt, updatedAt });
+    await User.upsert({ id, email, name, createdAt, updatedAt });
     done(null, profile);
   } catch (err) {
     if (err instanceof Error) {

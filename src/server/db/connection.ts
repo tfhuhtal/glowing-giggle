@@ -7,7 +7,7 @@ import { SequelizeStorage, Umzug } from 'umzug';
 export const sequelize = new Sequelize(DATABASE_URL, { logging: false });
 
 const umzug = new Umzug({
-  migrations: { glob: 'src/server/migrations/*.ts' },
+  migrations: { glob: 'src/server/db/migrations/*.ts' },
   context: sequelize.getQueryInterface(),
   storage: new SequelizeStorage({ sequelize }),
   logger: console,

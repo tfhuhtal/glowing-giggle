@@ -9,8 +9,6 @@ import { sequelize } from '../connection';
 class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
   declare id: string;
 
-  declare username: string;
-
   declare email: string;
 
   declare name: string;
@@ -27,11 +25,6 @@ User.init(
       allowNull: false,
       primaryKey: true,
       unique: true,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true,
     },
     email: {
       type: DataTypes.STRING,

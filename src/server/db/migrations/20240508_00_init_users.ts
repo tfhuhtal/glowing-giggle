@@ -4,31 +4,25 @@ import { Migration } from '../connection';
 
 export const up: Migration = ({ context: queryInterface }) =>
   queryInterface.createTable('users', {
-    iid: {
+    id: {
       type: DataTypes.STRING,
       allowNull: false,
       primaryKey: true,
       unique: true,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      primaryKey: true,
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
     },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    createdAt: {
+    created_at: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
-    updatedAt: {
+    updated_at: {
       type: DataTypes.DATE,
       allowNull: true,
     },

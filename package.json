@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/index.js",
+    "start": "docker compose up",
     "dev": "ts-node-dev src/server/index.ts",
     "lint": "eslint --ext .ts src/**/**",
     "tsc": "tsc"
