@@ -1,3 +1,10 @@
 import { User } from '../types';
 
-export { User };
+interface UserInfo {
+  id: string;
+  displayName: string;
+  username: string;
+  emails: { value: string }[];
+}
+
+export { User, UserInfo };

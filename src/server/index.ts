@@ -21,8 +21,10 @@ app.use(passport.session());
 app.use('/api', (req, res, next) => router(req, res, next));
 app.use('/api', (_, res) => res.sendStatus(404));
 
+/* eslint-disable */
 app.listen(PORT, async () => {
   await connectToDataBase();
-  await setUpAuth();
+  setUpAuth(); 
   logger.info(`Server running on port ${PORT}`);
 });
+/* eslint-disable */

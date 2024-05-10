@@ -30,13 +30,15 @@ export const connectToDataBase = async (attempt = 0): Promise<void | null> => {
   try {
     await sequelize.authenticate();
     await runMigrations();
-  } catch (err: any) {
-    if (attempt === 10) {
-      logger.error(`Connection to database couldn't be established after ${attempt} tries!`, {
-        error: err.stack,
-      });
+  } catch (err) {
+    if (err instanceof Error) {
+      if (attempt === 10) {
+        logger.error(`Connection to database couldn't be established after ${attempt} tries!`, {
+          error: err.stack,
+        });
 
-      return process.exit(1);
+        return process.exit(1);
+      }
     }
     logger.info(`Connection to database failed! Attempt ${attempt}/10`);
     logger.error('Database error: ', err);
